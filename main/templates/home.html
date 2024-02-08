@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+  <!-- Header with Title and description -->
+  <header class="mb-4 mt-4 text-center">
+    <h1>Title</h1>
+    <p>Description</p>
+  </header>
+
+  <!-- Main content row -->
+  <div class="row g-4">
+    <!-- Articles -->
+    {% for news in news_items %}
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ news.title }}</h5>
+            <p class="card-text">{{ news.text }}</p>
+          </div>
+          <div class="card-footer bg-light">
+            <a href="#" class="btn btn-link">Read more</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}
