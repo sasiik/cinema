@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('main.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('event/', include('event.urls'))
+    path('event/', include('event.urls')),
+    path('seats/', include('seats.urls'))
 ]
