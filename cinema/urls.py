@@ -16,12 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from main import views as home_views
 import debug_toolbar
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', home_views.redirect_to_home),
+    path('admin/', admin.site.urls, name='admin'),
     path('home/', include('main.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
     path('event/', include('event.urls')),
-    path('seats/', include('seats.urls'))
+    path('seats/', include('seats.urls')),
+    path('user/', include('user.urls')),
 ]

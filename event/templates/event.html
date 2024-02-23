@@ -4,35 +4,40 @@
 
 {% block content %}
   <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-6">
-        <!-- Event Picture -->
-        {% load static %}
-        <div class='event-image-container mb-4'>
-        <img src="{% static 'path/to/your/event-image.jpg' %}" alt="Event Picture" class="img-fluid">
-        </div>
-        <!-- Participate Button -->
-        <button class="btn btn-primary">Participate</button>
-        <p class="mt-2">Number of participants: x</p>
-      </div>
-      <div class="col-md-6">
-        <!-- Event Name -->
-        <h2>Event Name</h2>
-        <!-- Event Description -->
-        <p class='mt-4'>
-          Event description text goes here. It can be multiple lines long and will wrap accordingly.
-          Event description text goes here. It can be multiple lines long and will wrap accordingly.
-          Event description text goes here. It can be multiple lines long and will wrap accordingly.
-          Event description text goes here. It can be multiple lines long and will wrap accordingly.
-          Event description text goes here. It can be multiple lines long and will wrap accordingly.
-          Event description text goes here. It can be multiple lines long and will wrap accordingly.
-          Event description text goes here. It can be multiple lines long and will wrap accordingly.
-          Event description text goes here. It can be multiple lines long and will wrap accordingly.
-        </p>
-        <div class="text-end">
-          <a href="#" class="btn btn-link">Read more</a>
+    <form method="post" action="{% url 'participate' %}">
+      {% csrf_token %}
+      <input type="hidden" name="event_id" value={{ event_id }}>
+      {% for message in messages %}
+      <div class="container-fluid p-0 mb-4 mt-0">
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </button>
+          {{ message }}
         </div>
       </div>
-    </div>
+      {% endfor %}
+      <div class="row">
+        <div class="col-md-6">
+          {% load static %}
+          <div class="ratio ratio-1x1 position-relative mb-4">
+            <img src="{{ image }}" class="img-fluid" style="object-fit: cover;" alt="...">
+          </div>
+          {% if places_count == 0 %}
+          <button type="submit" class="btn btn-primary" disabled>Participate</button>
+          {% else %}
+          <button type="submit" class="btn btn-primary">Participate</button>
+          {% endif %}
+          <p class="mt-2">Places available: {{ places_count }}</p>
+        </div>
+        <div class="col-md-6">
+          <!-- Event Name -->
+          <h2>{{ title }}</h2>
+          <!-- Event Description -->
+          <p class='mt-4'>
+            {{ desc }}
+          </p>
+        </div>
+      </div>
+    </form>
   </div>
 {% endblock content %}

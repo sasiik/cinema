@@ -69,28 +69,6 @@ footer .btn-secondary {
   min-height: 50px; /* Push the footer to the bottom */
 }
 
-.event-image-container {
-  flex: 0 0 400px;
-  border: 1px solid lightblue;
-  width: 400px; /* Fixed width for the container */
-  height: 300px; /* Fixed height for the container */
-  overflow: hidden; /* Ensures the image does not bleed outside the container */
-}
-
-.event-image-container .img-fluid {
-  width: 100%; /* Ensures the image fills the container width */
-  height: 100%; /* Ensures the image fills the container height */
-  object-fit: cover; /* Ensures the image covers the area without stretching */
-}
-
-/* Responsive adjustments for smaller screens */
-@media (max-width: 768px) {
-  .event-image-container {
-    width: 100%; /* Full width on small screens */
-    height: auto; /* Height adjusts based on the aspect ratio */
-  }
-}
-
 .theatre {
   display: flex;
   justify-content: center;
@@ -274,5 +252,69 @@ footer .btn-secondary {
     .seat {
       transform: skew(-20deg);
     }
+  }
+}
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.end-0 {
+  right: 0;
+}
+
+.bg-warning {
+  background-color: #ffc107; /* Example color: Bootstrap's warning color */
+}
+
+.text-white {
+  color: #fff;
+}
+
+.px-2 {
+  padding-right: .5rem; /* Example padding */
+  padding-left: .5rem; /* Example padding */
+}
+
+.py-1 {
+  padding-top: .25rem; /* Example padding */
+  padding-bottom: .25rem; /* Example padding */
+}
+
+.tag-size {
+  width: 5em !important;
+  height: 2em !important;
+}
+
+.event-image-container {
+  width: 100%; /* Responsive width */
+  max-width: 400px; /* Maximum width */
+  min-height: 300px; /* Fixed height */
+  overflow: hidden;
+  border: 2px solid black;
+  margin-bottom: 1rem; /* Optional: Adds some space below the container */
+}
+
+.event-image-container .img-fluid {
+  height: 100%; /* Make the image fill the container height */
+  width: auto; /* Auto width for the image */
+  object-fit: cover; /* Cover fit to avoid stretching */
+}
+
+@media (max-width: 768px) {
+  .event-image-container {
+    width: 100%; /* Full width on small screens */
+    height: auto; /* Height auto for smaller screens if you want to maintain aspect ratio */
+  }
+  .event-image-container .img-fluid {
+    width: 100%; /* Full width */
+    height: auto; /* Adjust height automatically */
   }
 }
