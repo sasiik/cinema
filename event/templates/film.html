@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Event Page{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    {% for message in messages %}
+        <div class="container-fluid p-0 mb-4 mt-0">
+          <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            {{ message }}
+          </div>
+        </div>
+    {% endfor %}
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Event Picture -->
+        {% load static %}
+        <div class="ratio ratio-1x1 position-relative mb-4">
+        <img src={{ image }} class="img-fluid" style="object-fit: cover;" alt="...">
+        </div>
+        <!-- Participate Button -->
+        <p class="mt-2">Date: {{ date }}</p>
+          <p class="mb-4">Places available: {{ places_count }}</p>
+          {% if places_count == 0 %}
+          <a class="btn btn-primary" href="{% url "seat_choice" event_id=event_id %}">Participate</a>
+          {% else %}
+          <a class="btn btn-primary" href="{% url "seat_choice" event_id=event_id %}">Participate</a>
+          {% endif %}
+      </div>
+      <div class="col-md-6">
+        <!-- Event Name -->
+        <h2>{{ title }}</h2>
+        <!-- Event Description -->
+        <p class='mt-4'>
+          {{ desc }}
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+

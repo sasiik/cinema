@@ -1,157 +1,53 @@
-{% extends "base.html" %} {% block title %}Choose a seat{% endblock %} 
-{% block content %} 
+{% extends "base.html" %}
+
+{% block title %}Choose a seat{% endblock %}
+
+{% block content %}
 <div class="d-flex flex-column gap-4">
   <h1 class="text-center">Choose a seat</h1>
-  <div class="theatre mt-5">
-    <div class="cinema-seats left">
-      <div class="cinema-row row-1">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-2">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-3">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-4">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-5">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-6">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-7">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
+  <form method="post" action="{% url 'seat_choice' event_id=event_id%}">
+    {% csrf_token %}
+    <input type="hidden" name="event_id" value={{ event_id }}>
+    <input type="hidden" id="selected_seat" name="selected_seat" value=""> <!-- Make sure to pass the correct event ID here -->
+    <div class="d-flex flex-column align-items-center">
+        {% load seats_extras %}
+        {% for i in iteration.rows_per_side %}
+        <div class="mb-2">
+          {% for j in iteration.seats_per_row %}
+          {% if i|addstr:j in taken_places %}
+          <button type="button" class="btn btn-outline-dark m-1" id="{{ i }}{{ j }}" onclick="selectButton(this)" disabled>{{ i }}-{{ j }}</button>
+          {% else %}
+          <button type="button" class="btn btn-outline-primary m-1" id="{{ i }}{{ j }}" onclick="selectButton(this)">{{ i }}-{{ j }}</button>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endfor %}
     </div>
-
-    <div class="cinema-seats right">
-      <div class="cinema-row row-1">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-2">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-3">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-4">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-5">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-6">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
-
-      <div class="cinema-row row-7">
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-        <div class="seat"></div>
-      </div>
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-primary">OK</button>
     </div>
-  </div>
-  <div class="text-center mt-4">
-    <button class="btn btn-primary">OK</button>
-  </div>
+  </form>
 </div>
+
 {% load static %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{% static 'js/choose_seat.js' %}"></script>
+<script>
+  function selectButton(selectedBtn) {
+    // Get all buttons
+    var buttons = document.querySelectorAll('.btn');
+  
+    // Reset all buttons to outline
+    buttons.forEach(function(btn) {
+      btn.classList.remove('btn-primary');
+      btn.classList.add('btn-outline-primary');
+    });
+  
+    // Set the selected button to primary
+    selectedBtn.classList.remove('btn-outline-primary');
+    selectedBtn.classList.add('btn-primary');
+  
+    // Set the selected button value to the form input
+    document.getElementById('selected_seat').value = selectedBtn.id;
+  }  
+</script>
 {% endblock content %}

@@ -8,5 +8,14 @@
     {{ form|crispy }}
     <button class='btn btn-primary' type="submit">Sign up</button>
     <div class='mt-4'><a href="{% url "signup" %}">Don't have an Account? Create</a></div>
+    {% for message in messages %}
+    <div class="container-fluid p-0 mt-4 mt-0">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </button>
+        {{ message }}
+    </div>
+    </div>
+{% endfor %}
 </form>
 {% endblock content %}

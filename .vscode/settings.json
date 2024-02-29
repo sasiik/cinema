@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:/Users/Stas/.virtualenvs/cinema-pBw-AKUD"
+    "python.pythonPath": "C:/Users/Stas/.virtualenvs/cinema-pBw-AKUD",
+    "python.REPL.enableREPLSmartSend": false
 }

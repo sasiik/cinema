@@ -11,7 +11,6 @@
       <div class="container-fluid p-0 mb-4 mt-0">
         <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </button>
           {{ message }}
         </div>
       </div>
@@ -22,12 +21,13 @@
           <div class="ratio ratio-1x1 position-relative mb-4">
             <img src="{{ image }}" class="img-fluid" style="object-fit: cover;" alt="...">
           </div>
+          <p class="mt-2">Date: {{ date }}</p>
+          <p class="mb-4">Places available: {{ places_count }}</p>
           {% if places_count == 0 %}
           <button type="submit" class="btn btn-primary" disabled>Participate</button>
           {% else %}
           <button type="submit" class="btn btn-primary">Participate</button>
           {% endif %}
-          <p class="mt-2">Places available: {{ places_count }}</p>
         </div>
         <div class="col-md-6">
           <!-- Event Name -->

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from user.models import CustomUser
+from user.models import CustomUser, UserEvent
 from .models import Event
 from .forms import ParticipateForm
 
@@ -16,7 +16,9 @@ def parse_films(request):
 
 def event_page(request, event_id):
     current_event = Event.objects.get(id=event_id)
-    return render(request, 'event.html', {"image": current_event.image, "places_count": current_event.places_count, "title": current_event.title, "desc": current_event.desc, "event_id": current_event.id})
+    if current_event.event_type.title == 'event':
+        return render(request, 'event.html', {"image": current_event.image, "places_count": current_event.places_count, "title": current_event.title, "desc": current_event.desc, "event_id": current_event.id, "date": current_event.date})
+    return render(request, 'film.html', {"image": current_event.image, "places_count": current_event.places_count, "title": current_event.title, "desc": current_event.desc, "event_id": current_event.id, "date": current_event.date})
 
 @login_required
 def participate(request):
@@ -27,9 +29,10 @@ def participate(request):
             event = get_object_or_404(Event, pk=event_id)
             if not event in request.user.user_events.all():
                 if event.places_count > 0:
+                    current_participants_count = len(CustomUser.objects.filter(user_event_links__event=event))
+                    user_event = UserEvent.objects.create(user=request.user, event=event, place=current_participants_count+1)
                     event.places_count -= 1
                     event.save()
-                    request.user.user_events.add(event)
                     if event.places_count == 0:
                         event.is_available = 0
                         event.save()
@@ -39,5 +42,5 @@ def participate(request):
             else:
                 messages.error(request, 'You are already participating in this event.')
 
-            return redirect('event_page', event_id=event_id)
+            return redirect('event_page', event_id=event_id, messages=messages)
     return redirect('home')
