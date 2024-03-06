@@ -1,4 +1,9 @@
 {
     "python.pythonPath": "C:/Users/Stas/.virtualenvs/cinema-pBw-AKUD",
-    "python.REPL.enableREPLSmartSend": false
+    "python.REPL.enableREPLSmartSend": false,
+    "python.testing.pytestArgs": [
+        "event"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

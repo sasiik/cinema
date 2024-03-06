@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from user.models import CustomUser, UserEvent
+from user.models import CustomUser, Ticket
 from .models import Event
 from .forms import ParticipateForm
 
@@ -30,7 +30,7 @@ def participate(request):
             if not event in request.user.user_events.all():
                 if event.places_count > 0:
                     current_participants_count = len(CustomUser.objects.filter(user_event_links__event=event))
-                    user_event = UserEvent.objects.create(user=request.user, event=event, place=current_participants_count+1)
+                    user_event = Ticket.objects.create(user=request.user, event=event, place=current_participants_count+1)
                     event.places_count -= 1
                     event.save()
                     if event.places_count == 0:

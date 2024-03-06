@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest, HttpResponse
 from event.models import Event
-from user.models import UserEvent
+from user.models import Ticket
 from .hall_config import create_iteration
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -19,9 +19,9 @@ def choice(request, event_id):
                 if event.places_count > 0:
                     place = form.cleaned_data['selected_seat']
                     if place:
-                        seat_taken = UserEvent.objects.filter(event=event, place=place).exists()
+                        seat_taken = Ticket.objects.filter(event=event, place=place).exists()
                         if not seat_taken:
-                            user_event = UserEvent.objects.create(user=request.user, event=event, place=place)
+                            user_event = Ticket.objects.create(user=request.user, event=event, place=place)
                             event.places_count -= 1
                             event.save()
                             if event.places_count == 0:
