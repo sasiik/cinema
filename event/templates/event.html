@@ -21,9 +21,12 @@
           <div class="ratio ratio-1x1 position-relative mb-4">
             <img src="{{ image }}" class="img-fluid" style="object-fit: cover;" alt="...">
           </div>
-          <p class="mt-2">Date: {{ date }}</p>
-          <p class="mb-4">Places available: {{ places_count }}</p>
-          {% if places_count == 0 %}
+          <div class="d-flex flex-column">
+          <p>Date: {{ date }}</p>
+          <p>Places available: {{ places_available }}</p>
+          <p>Location: {{ location.name }}</p>
+          </div>
+          {% if places_available == 0 or is_available == False %}
           <button type="submit" class="btn btn-primary" disabled>Participate</button>
           {% else %}
           <button type="submit" class="btn btn-primary">Participate</button>

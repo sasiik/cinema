@@ -6,3 +6,9 @@ class News(models.Model):
     short_desc = models.TextField(max_length=256)
     full_link = models.TextField()
     image = models.ImageField()
+    
+    class Meta:
+        verbose_name_plural = "News"
+        
+    def __str__(self):
+        return f"{self.title}"
