@@ -5,10 +5,14 @@ from django.db.models import UniqueConstraint, CheckConstraint, Q
 from event.models import Event
 
 
+
+# Custom User table
 class CustomUser(AbstractUser):
     
     def __str__(self):
         return self.username
+
+# Table for Users' tickets to the Events 
 
 class Ticket(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='event_tickets')
@@ -17,6 +21,7 @@ class Ticket(models.Model):
 
     class Meta:
        constraints = [
+            # Unique constraint and Check constraint that ensures that place number >= 0
             UniqueConstraint(fields=['user', 'event'], name='unique_user_event', violation_error_message="Pair user-event already exists"),
             CheckConstraint(check=Q(place__gte=0), name='ticket_place_positive')
         ]

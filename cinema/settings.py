@@ -97,9 +97,9 @@ WSGI_APPLICATION = 'cinema.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres', #CHANGE!!!
-        'PASSWORD': 'stasPO24082005?',
+        'NAME': 'cinema',
+        'USER': 'cinema', #CHANGE WHEN DEPLOYING!!!
+        'PASSWORD': 'stasCI24082005?',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -173,3 +173,18 @@ MESSAGE_TAGS = {
         messages.ERROR: 'alert-danger',
  }
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}

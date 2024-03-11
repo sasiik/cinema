@@ -1,6 +1,8 @@
 from datetime import date
 from .models import Event, Types, EventLocation  # Replace 'yourapp' with the actual name of your Django app
 
+# Remake tests
+
 # Ensure there are Types for "film" and "event"
 film_type, _ = Types.objects.get_or_create(title="film")
 event_type, _ = Types.objects.get_or_create(title="event")

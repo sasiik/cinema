@@ -1,32 +1,41 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Home Page{% endblock %} 
 {% block content %}
-<!-- Header with Title and description -->
+<!-- Header -->
 <header class="mb-4 mt-4 text-center">
   <h1>Title</h1>
   <p id='news'>Description</p>
 </header>
-<!-- Main content row -->
 <div class="row g-4">
-  {% load static %}
+  <!-- News items -->
   {% for news in news_items %}
   {% include "news_card.html" with image=news.image title=news.title short_desc=news.short_desc full_link=news.full_link %}
+  {% empty %}
+  <p>No news to display.</p>
   {% endfor %}
 </div>
 <header class="mb-4 mt-4 text-center">
+  <!-- All events -->
   <h2>All Events</h2>
 </header>
 <div class="container-fluid d-grid gap-3">
   <h3 id='films'>Films</h3>
   <div class="row flex-nowrap" style="overflow-x: scroll">
     {% for film in films_items %}
+    <!-- Films -->
     {% include "event_card.html" with image=film.image title=film.title short_desc=film.short_desc is_available=film.is_available id=film.id %}
+    {% empty %}
+    <p>No films to display.</p>
     {% endfor %}
   </div>
   <h3 id='events'>Events</h3>
   <div class="row flex-nowrap" style="overflow-x: scroll">
     {% for event in events_items %}
+    <!-- Events -->
     {% include "event_card.html" with image=event.image title=event.title short_desc=event.short_desc is_available=event.is_available id=event.id %}
+    {% empty %}
+    <p>No events to display.</p>
     {% endfor %}
   </div>
 </div>

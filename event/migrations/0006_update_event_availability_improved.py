@@ -2,33 +2,32 @@
 
 from django.db import migrations
 
-
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('event', '0005_merge_20240306_2310'),
+        ('event', '0005_merge_20240306_2310'), 
     ]
 
     operations = [
         migrations.RunSQL(
             sql=
             """
+            -- Defines or replaces a PostgreSQL function named update_event_availability.
             CREATE OR REPLACE FUNCTION update_event_availability() RETURNS TRIGGER AS $$
             BEGIN
-                -- Update the is_available status based on event date and available places
+                -- Conditional logic to update is_available.
+                -- Sets is_available to TRUE if the event's date is today or in the future and there are more than 0 available places.
+                -- Sets is_available to FALSE otherwise.
                 UPDATE event_event
                 SET is_available = CASE 
                                     WHEN date >= CURRENT_DATE AND available_places > 0 THEN TRUE
                                     ELSE FALSE
                                 END
-                WHERE id = NEW.id;
+                WHERE id = NEW.id;  -- Applies the update to the event that triggered this function.
                 
-                RETURN NEW;
+                RETURN NEW; 
             END;
             $$ LANGUAGE plpgsql;
-            
-            
             """
-            )
+        ),
     ]
-    

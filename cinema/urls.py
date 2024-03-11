@@ -15,16 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path, include
-from main import views as home_views
-import debug_toolbar
+
+def redirect_to_home(request):
+    return redirect('home')
 
 urlpatterns = [
-    path('', home_views.redirect_to_home),
+    path('', redirect_to_home), # Home page is /hoome
     path('admin/', admin.site.urls, name='admin'),
     path('home/', include('main.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('event/', include('event.urls')),
-    path('seats/', include('seats.urls')),
-    path('user/', include('user.urls')),
+    path('event/', include('event.urls')), # Event page 
+    path('seats/', include('seats.urls')), # Seats choice
+    path('user/', include('user.urls')), # User pages (login, register, etc.)
 ]

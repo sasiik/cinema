@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import News
-# Create your views here.
 
-def parse_news(request):
+# News parser
+def parse_news():
     news = News.objects.all()
     return news

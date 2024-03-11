@@ -1,5 +1,5 @@
-from django.core.files import File  # Import if you're setting images from local paths
-from .models import News  # Replace 'yourapp' with your actual app name
+from django.core.files import File 
+from .models import News 
 
 # Example details for News objects
 news_details = [
@@ -17,11 +17,9 @@ for detail in news_details:
         defaults={
             "short_desc": detail["short_desc"],
             "full_link": detail["full_link"],
-            # Assuming you're handling images as File objects, or adjust as necessary for your setup
             "image": detail['image_path'],
         }
     )
     print(f'{"Created" if created else "Updated"} {news.title}')
 from django.test import TestCase
 
-# Create your tests here.

@@ -1,14 +1,17 @@
+<!-- News card template for displaying individual news items -->
 <div class="col-md-4">
-    <div class="card h-100">
+  <div class="card h-100">
       <div class="ratio ratio-4x3">
-      <img src={{ image }} class="card-img-top img-fluid" style="object-fit: cover;" alt="...">
+          <!-- News image -->
+          <img src={{ image }} class="card-img-top img-fluid" style="object-fit: cover;" alt="...">
       </div>
       <div class="card-body">
-        <h5 class="card-title">{{ title }}</h5>
-        <p class="card-text">{{ short_desc }}</p>
+          <h5 class="card-title">{{ title }}</h5> <!-- News title -->
+          <p class="card-text">{{ short_desc }}</p> <!-- Short description -->
       </div>
       <div class="card-footer bg-light">
-        <a href={{ full_link }} class="btn btn-link">Read more</a>
+          <!-- Read more link leading to the full news article -->
+          <a href={{ full_link }} class="btn btn-link">Read more</a>
       </div>
-    </div>
   </div>
+</div>

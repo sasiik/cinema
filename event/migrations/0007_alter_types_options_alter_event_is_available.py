@@ -10,10 +10,12 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        # Updates the plural name for the Types model to "Types" for the Django admin.
         migrations.AlterModelOptions(
             name='types',
             options={'verbose_name_plural': 'Types'},
         ),
+        # Sets the default value of the is_available field in the Event model to True.
         migrations.AlterField(
             model_name='event',
             name='is_available',

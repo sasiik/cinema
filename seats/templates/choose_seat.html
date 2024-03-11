@@ -4,25 +4,31 @@
 
 {% block content %}
 <div class="d-flex flex-column gap-4">
+  <!-- Title for the seat selection page -->
   <h1 class="text-center">Choose a seat</h1>
-  <form method="post" action="{% url 'seat_choice' event_id=event_id%}">
+  <form method="post" action="{% url 'participate' event_id=event_id %}">
     {% csrf_token %}
+    <!-- Hidden input fields for passing event ID and selected seat -->
     <input type="hidden" name="event_id" value={{ event_id }}>
-    <input type="hidden" id="selected_seat" name="selected_seat" value=""> <!-- Make sure to pass the correct event ID here -->
+    <input type="hidden" id="selected_seat" name="selected_seat" value=""> 
     <div class="d-flex flex-column align-items-center">
         {% load seats_extras %}
-        {% for i in iteration.rows_per_side %}
+        <!-- Loop for generating seat buttons -->
+        {% for row in iteration %}
         <div class="mb-2">
-          {% for j in iteration.seats_per_row %}
-          {% if i|addstr:j in taken_places %}
-          <button type="button" class="btn btn-outline-dark m-1" id="{{ i }}{{ j }}" onclick="selectButton(this)" disabled>{{ i }}-{{ j }}</button>
+          {% for seat in row %}
+          {% if seat in taken_places %}
+          <!-- Disabled button for already taken seats -->
+          <button type="button" class="btn btn-outline-dark m-1 seat-button" id="{{ seat }}" disabled>{{ seat }}</button>
           {% else %}
-          <button type="button" class="btn btn-outline-primary m-1" id="{{ i }}{{ j }}" onclick="selectButton(this)">{{ i }}-{{ j }}</button>
+          <!-- Enabled button for available seats -->
+          <button type="button" class="btn btn-outline-primary m-1 seat-button" id="{{ seat }}" onclick="selectButton(this)">{{ seat }}</button>
           {% endif %}
           {% endfor %}
         </div>
         {% endfor %}
     </div>
+    <!-- Submit button for confirming seat selection -->
     <div class="text-center mt-4">
       <button type="submit" class="btn btn-primary">OK</button>
     </div>
@@ -30,8 +36,10 @@
 </div>
 
 {% load static %}
+<!-- JavaScript for handling seat selection -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  // Function to handle seat selection
   function selectButton(selectedBtn) {
     // Get all buttons
     var buttons = document.querySelectorAll('.btn');

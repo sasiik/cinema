@@ -1,14 +1,15 @@
-from django.shortcuts import render, redirect
-from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render
+from event.views import parse_events
 from news.views import parse_news
-from event.views import parse_events, parse_films
-from news.views import parse_news
+from event.models import Types
 
-def show_data(request):
-    news_items = parse_news(request)
-    events_items = parse_events(request)
-    films_items = parse_films(request)
-    return render(request, 'home.html', {'news_items': news_items, 'events_items': events_items, 'films_items': films_items})
+# Show data on main page
 
-def redirect_to_home(request):
-    return redirect('home')
+def display_home(request):
+    event_types = (type.title for type in Types.objects.all())
+    arguments = {}
+    for type in event_types:
+        arguments[f'{type}s_items'] = parse_events(request, type)
+    arguments['news_items'] = parse_news()
+    return render(request, 'home.html', arguments)
+

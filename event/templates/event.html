@@ -4,36 +4,48 @@
 
 {% block content %}
   <div class="container mt-5">
-    <form method="post" action="{% url 'participate' %}">
+    <!-- Form for Participating in an Event -->
+    <form method="post" action="{% url 'participate' event_id=event_id %}">
       {% csrf_token %}
+      <!-- Hidden Input Field for Event ID -->
       <input type="hidden" name="event_id" value={{ event_id }}>
+      <!-- Display Messages -->
       {% for message in messages %}
       <div class="container-fluid p-0 mb-4 mt-0">
         <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <!-- Display Message -->
           {{ message }}
         </div>
       </div>
       {% endfor %}
+      <!-- Row for Event Details and Participation Button -->
       <div class="row">
+        <!-- Column for Event Image and Details -->
         <div class="col-md-6">
           {% load static %}
+          <!-- Image Container with Aspect Ratio -->
           <div class="ratio ratio-1x1 position-relative mb-4">
-            <img src="{{ image }}" class="img-fluid" style="object-fit: cover;" alt="...">
+            <!-- Event Image -->
+            <img src="{{ image }}" class="img-fluid" style="object-fit: cover;" alt="Event Image">
           </div>
+          <!-- Event Details -->
           <div class="d-flex flex-column">
-          <p>Date: {{ date }}</p>
-          <p>Places available: {{ places_available }}</p>
-          <p>Location: {{ location.name }}</p>
+            <!-- Event Data -->
+            <p>Date: {{ date }}</p>
+            <p>Places available: {{ places_available }}</p>
+            <p>Location: {{ location.name }}</p>
           </div>
+          <!-- Participation Button -->
           {% if places_available == 0 or is_available == False %}
           <button type="submit" class="btn btn-primary" disabled>Participate</button>
           {% else %}
-          <button type="submit" class="btn btn-primary">Participate</button>
+          <button type="submit" class="btn btn-primary" id="participate-btn">Participate</button>
           {% endif %}
         </div>
+        <!-- Column for Event Title and Description -->
         <div class="col-md-6">
-          <!-- Event Name -->
+          <!-- Event Title -->
           <h2>{{ title }}</h2>
           <!-- Event Description -->
           <p class='mt-4'>

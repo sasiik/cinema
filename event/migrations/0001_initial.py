@@ -4,6 +4,7 @@ import datetime
 import django.db.models.deletion
 from django.db import migrations, models
 
+# Initial migration
 
 class Migration(migrations.Migration):
 

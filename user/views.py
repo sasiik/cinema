@@ -6,6 +6,7 @@ from django.contrib import messages
 from .forms import SignupForm, LoginForm
 from .models import CustomUser
 
+# Signup function
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -17,6 +18,7 @@ def signup(request):
         form = SignupForm()
     return render(request, 'register.html', {'form': form})
 
+# Login function
 def userlogin(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -33,12 +35,12 @@ def userlogin(request):
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
-# logout page
+# Logout function
 def userlogout(request):
     logout(request)
     return redirect('/home')
 
 
-def retrieve_user_data(request):
-    current_user = CustomUser.objects.filter(user=request.user)
-    return current_user
+# def retrieve_user_data(request):
+#     current_user = CustomUser.objects.filter(user=request.user)
+#     return current_user
