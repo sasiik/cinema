@@ -1,4 +1,3 @@
-from typing import Iterable
 from django.db import models
 from datetime import date
 from django.db.models import CheckConstraint, Q, UniqueConstraint
@@ -40,7 +39,7 @@ class Event(models.Model):
     short_desc = models.TextField(max_length=256)
     desc = models.TextField()
     location = models.ForeignKey(EventLocation, on_delete=models.CASCADE)
-    image = models.ImageField() # I should handle images differently
+    image = models.ImageField(upload_to='images/events/') # I should handle images differently
     date = models.DateField(default=date(1970, 1, 1))
     is_available = models.BooleanField(default=True)
     available_places = models.IntegerField()

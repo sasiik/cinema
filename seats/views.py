@@ -1,10 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render, redirect
 from event.models import Event
 from user.models import Ticket
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from event.forms import ParticipateForm
 
 
 def divide_seats_into_rows(seats_per_row, seats_count):

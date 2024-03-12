@@ -16,25 +16,25 @@ def parse_events(request, event_type):
 
 
 def display_event(request, event_id):
-    
+
     supported_pages = {
         'film': 'film.html',
         'event': 'event.html'
-        }
+    }
     current_event = Event.objects.get(id=event_id)
     event_type = current_event.location.event_type.title
     template_name = supported_pages[event_type]
-    
-    
+
     arguments = {
         "image": current_event.image,
         "location": current_event.location,
         "title": current_event.title,
         "desc": current_event.desc,
-        "event_id": current_event.id,
+        "event_id": event_id,
         "is_available": current_event.is_available,
         "date": current_event.date,
-        "places_available": current_event.available_places
+        "places_available": current_event.available_places,
+        # "is_participating": current_event.event_tickets.objects.filter(user=request.user) consider in future to make cancel buttons
     }
     return render(request, template_name, arguments)
 

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'seats',
     'user',
     'news',
+    'myaccount',
     'debug_toolbar',
     'crispy_forms',
     "crispy_bootstrap5",
@@ -188,3 +189,7 @@ LOGGING = {
         },
     },
 }
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

@@ -1,4 +1,3 @@
-from django.core.files import File 
 from .models import News 
 
 # Example details for News objects
@@ -21,5 +20,4 @@ for detail in news_details:
         }
     )
     print(f'{"Created" if created else "Updated"} {news.title}')
-from django.test import TestCase
 
