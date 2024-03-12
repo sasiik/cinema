@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block title %}Event Page{% endblock %} {% block content %}
+<div class="container">
+  <form method="post" action="{% url 'delete_item' %}" id="deletionForm">
+    {% csrf_token %}
+    <!-- Hidden Input Field for Event ID -->
+    <input type="hidden" id="selected_event" name="selected_event" value=""> 
+    <div class="row">
+      <!-- Account Information Section -->
+      <div class="col-md-3">
+        <div class="card rounded-0 mh-100" >
+          <div class="card-body">
+            <h5 class="card-title mb-4">My Account</h5>
+            <p class="mb-1"><strong>Username: </strong>{{ user.username }}</p>
+            <p class="mb-0"><strong>Email: </strong>{{ user.email }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Events Section -->
+      <div class="col-md-9">
+        <div class="card rounded-0 border-top">
+          <div class="card-header"><b>My Events</b></div>
+          <ul class="list-group list-group-flush">
+            {% for ticket in my_tickets %}
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <i>{{ ticket.event_name }}</i>
+              Place {{ ticket.place }}
+              <button
+                class="badge bg-danger border-danger rounded-pill"
+                id="{{ ticket.event_id }}"
+                onclick="deleteEvent(this);"
+              >
+                Cancel
+              </button>
+            </li>
+            {% endfor %}
+            <!-- Repeat for other events -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+  // Function to handle seat selection
+  function deleteEvent(selectedBtn) {
+    var confirmDeletion = confirm("Are you sure you want to delete that?");
+    if (confirmDeletion) {
+        document.getElementById('selected_event').value = selectedBtn.id;
+        var form = document.getElementById('deletionForm');
+        // Optional: Check if the form is valid
+        if (form.checkValidity()) {
+            form.submit(); // Submit the form
+        }
+    }
+  }  
+</script>
+{% endblock content %}

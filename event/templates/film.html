@@ -1,47 +1,56 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}Event Page{% endblock %} {% block content %}
+<div class="container mt-5">
+  <!-- Display messages -->
+  {% for message in messages %}
+  <div class="container-fluid p-0 mb-4 mt-0">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+      {{ message }}
+    </div>
+  </div>
+  {% endfor %}
 
-{% block title %}Event Page{% endblock %}
-
-{% block content %}
-  <div class="container mt-5">
-    <!-- Display messages -->
-    {% for message in messages %}
-      <div class="container-fluid p-0 mb-4 mt-0">
-        <div class="alert {{ message.tags }} alert-dismissible" role="alert">
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          {{ message }}
-        </div>
-      </div>
-    {% endfor %}
-    
-    <div class="row">
+  <div class="card">
+    <div class="row g-0">
       <div class="col-md-6">
         <!-- Film Picture -->
         {% load static %}
-        <div class="ratio ratio-1x1 position-relative mb-4">
-          <img src={{ image.url }} class="img-fluid" style="object-fit: cover;" alt="Event Picture">
+        <div class="ratio ratio-1x1 position-relative">
+          <img
+            src="{{ image.url }}"
+            class="img-fluid"
+            style="object-fit: cover"
+            alt="Event Picture"
+          />
         </div>
-        <!-- Film Details -->
+      </div>
+      <div class="col-md-6">
+        <div class='card-body'>
+          <!-- Film Name -->
+          <h2>{{ title }}</h2>
+          <!-- Film Description -->
+          <p class="mt-4">{{ desc }}</p>
+        </div>
+      </div>
+      <div class='card-footer'>
         <div class="d-flex flex-column">
-          <p>Date: {{ date }}</p>
-          <p>Places available: {{ places_available }}</p>
-          <p>Location: {{ location.name }}</p>
+          <i>Date: {{ date }}</i>
+          <i>Places available: {{ places_available }}</i>
+          <i>Location: {{ location.name }}</i>
         </div>
         <!-- Participation Button -->
         {% if places_available == 0 or is_available == False %}
-          <a class="btn btn-primary" disabled>Participate</a>
+          <a class="btn btn-primary mt-4" disabled>Participate</a>
         {% else %}
-          <a class="btn btn-primary" href="{% url "display_seats" event_id=event_id %}">Participate</a>
+          <a class="btn btn-primary mt-4" href="{% url "display_seats" event_id=event_id %}">Participate</a>
         {% endif %}
-      </div>
-      <div class="col-md-6">
-        <!-- Film Name -->
-        <h2>{{ title }}</h2>
-        <!-- Film Description -->
-        <p class='mt-4'>
-          {{ desc }}
-        </p>
       </div>
     </div>
   </div>
+</div>
 {% endblock content %}

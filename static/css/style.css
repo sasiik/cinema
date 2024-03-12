@@ -87,6 +87,39 @@ footer .btn-secondary {
   border-radius: 7px;
 } */
 
-.seat-button {
-  width: 50px !important;
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .seat-button {
+    padding: .375rem .75rem; /* Original padding */
+    font-size: 1rem; /* Original font size */
+    min-width: 40px; 
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .seat-button {
+    padding: .25rem .5rem; /* Smaller padding */
+    font-size: .9rem; /* Smaller font size */
+    min-width: 30px; 
+  }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .seat-button {
+    padding: .2rem .4rem; /* Even smaller padding */
+    font-size: .8rem; /* Even smaller font size */
+    min-width: 20px; 
+  }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .seat-button {
+    padding: .175rem .35rem; /* Smallest padding */
+    font-size: .7rem; /* Smallest font size */
+    min-width: 10px; 
+  }
 }

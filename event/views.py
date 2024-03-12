@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from event.parsers import ParserFactory
+from cinema.parsers import ParserFactory
 
 from event.participators import ParticipateFactory
 from .models import Event
@@ -9,8 +9,8 @@ from .models import Event
 
 
 def parse_events(request, event_type):
-    parsed_data = ParserFactory.get_parser(event_type, request)
-    return parsed_data.get_events()
+    parsed_data = ParserFactory.get_parser(event_type, request).get_events()
+    return parsed_data
 
 # Fuction to display events
 

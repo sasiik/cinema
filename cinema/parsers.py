@@ -1,4 +1,5 @@
 from event.models import Event
+from user.models import Ticket
 
 
 class BaseParser:
@@ -15,6 +16,10 @@ class EventParser(BaseParser):
 class FilmParser(BaseParser):
     def get_events(self):
         return Event.objects.filter(location__event_type__title="film")
+    
+class MyTicketsParser(BaseParser):
+    def get_events(self):
+        return Ticket.objects.filter(user_id=self.request.user.id)
 
 
 class ParserFactory:
@@ -23,6 +28,7 @@ class ParserFactory:
         parsers = {
             'event': EventParser,
             'film': FilmParser,
+            'my_tickets': MyTicketsParser,
             # Add more mappings as needed
         }
         parser = parsers.get(event_type)
