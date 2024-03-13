@@ -23,7 +23,7 @@
             <!-- Event Description -->
             <p class="card-text">{{ short_desc }}</p>
             <!-- "Show more" Link -->
-            <a href="{% url "event_page" event_id=id %}" class="link-primary stretched-link">Show more</a>
+            <a href="{% url "event_page" event_id=id %}" class="link-primary stretched-link" onclick="pushStateToHistory({page: 1}, 'Event page', '{% url "event_page" event_id=id %}')">Show more</a>
         </div>
     </div>
 </div>

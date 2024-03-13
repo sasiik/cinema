@@ -1,6 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from datetime import date
 from django.db.models import UniqueConstraint, CheckConstraint, Q
 from event.models import Event
 

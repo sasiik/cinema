@@ -56,8 +56,3 @@ class Event(models.Model):
         
     def __str__(self):
         return f"{self.title}"
-    
-    # def save(self, *args, **kwargs):
-    #     if self.available_places is None:
-    #         self.available_places = self.location.places_count
-    #         super(Event, self).save(*args, **kwargs)

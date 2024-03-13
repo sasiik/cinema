@@ -38,8 +38,3 @@ def userlogin(request):
 def userlogout(request):
     logout(request)
     return redirect('/home')
-
-
-# def retrieve_user_data(request):
-#     current_user = CustomUser.objects.filter(user=request.user)
-#     return current_user

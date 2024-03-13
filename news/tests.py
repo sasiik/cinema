@@ -2,12 +2,12 @@ from .models import News
 
 # Example details for News objects
 news_details = [
-    {"title": "News 1", "short_desc": "Short description for News 1", "full_link": "http://example.com/news1", "image_path": "/path/to/image1.jpg"},
-    {"title": "News 2", "short_desc": "Short description for News 2", "full_link": "http://example.com/news2", "image_path": "/path/to/image2.jpg"},
-    {"title": "News 3", "short_desc": "Short description for News 3", "full_link": "http://example.com/news3", "image_path": "/path/to/image3.jpg"},
-    {"title": "News 4", "short_desc": "Short description for News 4", "full_link": "http://example.com/news4", "image_path": "/path/to/image4.jpg"},
-    {"title": "News 5", "short_desc": "Short description for News 5", "full_link": "http://example.com/news5", "image_path": "/path/to/image5.jpg"},
-    {"title": "News 6", "short_desc": "Short description for News 6", "full_link": "http://example.com/news6", "image_path": "/path/to/image6.jpg"},
+    {"title": "News 1", "short_desc": "Short description for News 1", "full_link": "http://example.com/news1", "image_path": "images/news/test_image.jpg"},
+    {"title": "News 2", "short_desc": "Short description for News 2", "full_link": "http://example.com/news2", "image_path": "images/news/test_image.jpg"},
+    {"title": "News 3", "short_desc": "Short description for News 3", "full_link": "http://example.com/news3", "image_path": "images/news/test_image.jpg"},
+    {"title": "News 4", "short_desc": "Short description for News 4", "full_link": "http://example.com/news4", "image_path": "images/news/test_image.jpg"},
+    {"title": "News 5", "short_desc": "Short description for News 5", "full_link": "http://example.com/news5", "image_path": "images/news/test_image.jpg"},
+    {"title": "News 6", "short_desc": "Short description for News 6", "full_link": "http://example.com/news6", "image_path": "images/news/test_image.jpg"},
 ]
 
 for detail in news_details:

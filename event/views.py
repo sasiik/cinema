@@ -34,7 +34,6 @@ def display_event(request, event_id):
         "is_available": current_event.is_available,
         "date": current_event.date,
         "places_available": current_event.available_places,
-        # "is_participating": current_event.event_tickets.objects.filter(user=request.user) consider in future to make cancel buttons
     }
     return render(request, template_name, arguments)
 

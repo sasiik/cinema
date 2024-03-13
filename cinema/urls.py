@@ -31,5 +31,5 @@ urlpatterns = [
     path('event/', include('event.urls')), # Event page 
     path('seats/', include('seats.urls')), # Seats choice
     path('user/', include('user.urls')), # User pages (login, register, etc.)
-    path('myaccount/', include('myaccount.urls'))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('myaccount/', include('myaccount.urls')) # User account page
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Media catalogue
